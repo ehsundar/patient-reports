@@ -1,0 +1,53 @@
+{{define "title"}}Edit User{{end}}
+
+{{define "main"}}
+
+    {{with .formData}}
+        <form action="/user/edit" method="post">
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input id="username" type="text" name="username" class="form-control" value="{{.username}}" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" class="form-control" disabled>
+            </div>
+
+            <div class="form-group">
+                <label for="fullName">Full Name</label>
+                <input id="fullName" type="text" name="full_name" class="form-control" value="{{.fullName}}">
+            </div>
+
+            <div class="form-check ">
+                {{if .isActive}}
+                    <input id="isActive" type="checkbox" name="is_active" class="form-check-input" checked>
+                {{else}}
+                    <input id="isActive" type="checkbox" name="is_active" class="form-check-input">
+                {{end}}
+                <label for="isActive" class="form-check-label">Active</label>
+            </div>
+
+            <div class="form-group">
+                <label for="organization">Organization</label>
+                <select id="organization" name="organization" class="form-control">
+                    {{range $.organizations}}
+                        {{if eq . $.formData.organization}}
+                            <option selected>{{.}}</option>
+                        {{else}}
+                            <option>{{.}}</option>
+                        {{end}}
+                    {{end}}
+                </select>
+            </div>
+
+            <input role="button" type="submit" class="btn btn-primary">
+        </form>
+    {{else}}
+        <h1>No form data is provided</h1>
+    {{end}}
+
+{{end}}
+
+{{template "base" .}}

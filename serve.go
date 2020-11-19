@@ -13,10 +13,9 @@ func main() {
 		panic(err)
 	}
 
-	userController := user.NewController()
-
 	r := mux.NewRouter()
 
+	userController := user.NewController()
 	userController.Register(r.PathPrefix("/user").Subrouter())
 
 	if err = http.Serve(listener, r); err != nil {
