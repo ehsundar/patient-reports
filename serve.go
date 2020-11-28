@@ -1,14 +1,15 @@
 package main
 
 import (
-	"github.com/ehsundar/reports/internal/user"
-	"github.com/gorilla/mux"
 	"net"
 	"net/http"
+
+	"github.com/ehsundar/reports/internal/user"
+	"github.com/gorilla/mux"
 )
 
 func main() {
-	listener, err := net.Listen("tcp", "127.0.0.1:8000")
+	listener, err := net.Listen("tcp", "0.0.0.0:8000")
 	if err != nil {
 		panic(err)
 	}
